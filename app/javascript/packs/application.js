@@ -10,6 +10,8 @@ import "channels"
 
 import "stylesheets/application"
 
+import "../application.css"; 
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
