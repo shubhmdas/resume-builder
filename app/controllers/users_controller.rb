@@ -5,11 +5,11 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        @user.profile = Profile.new
+        user = User.new(user_params)
+        user.profile = Profile.new
 
-        if @user.save
-            log_in(@user)
+        if user.save
+            session[:user_id] = user.id
             redirect_to(edit_path)
             flash[:success] = "Registered successfully!"
 
@@ -22,7 +22,8 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :confirm_password)
+        params.require(:user).permit(:name, :email, :password, :confirm_password, :avatar)
     end
 
 end
+  

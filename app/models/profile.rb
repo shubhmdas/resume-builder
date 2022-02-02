@@ -2,6 +2,8 @@ class Profile < ApplicationRecord
     has_many(:educations, dependent: :destroy)
     accepts_nested_attributes_for(:educations , reject_if: :reject_education_create, allow_destroy: true)
 
+    has_one_attached :avatar
+
     belongs_to :user
 
     def reject_education_create(education)
