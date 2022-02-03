@@ -60,7 +60,29 @@
         <% end %>
 
         <%= render 'shared/profile/profile_section_card', title: "Experience and Projects" do %>
-            <%= render partial: 'shared/profile/experience', collection: profile.experiences %>
+            <% profile.experiences.each do |experience| %>
+                <div class="mt-8 text-gray-500">
+                    <%= render 'shared/profile/item_with_description', 
+                        title: experience.company,
+                        subtitle: experience.position,
+                        start_date: experience.start,
+                        end_date: experience.end,
+                        description: experience.description
+                    %>
+                    <% profile.projects.each do |project| %>
+                        <% if experience.id == project.experience_id %>
+                            <div class="text-gray-500">
+                                <%= render 'shared/profile/item_with_link', 
+                                    title: project.title,
+                                    link: project.project_url,
+                                    subtitle: project.tech_stack,
+                                    description: project.description
+                                %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+            <% end %>
         <% end %>
 
         <%= render 'shared/profile/profile_section_card', title: "Education" do %>

@@ -5,6 +5,9 @@ class Profile < ApplicationRecord
     has_many(:experiences, dependent: :destroy)
     accepts_nested_attributes_for(:experiences, reject_if: :reject_experience_create, allow_destroy: true)
 
+    has_many(:projects, dependent: :destroy)
+    accepts_nested_attributes_for(:projects, reject_if: :reject_project_create, allow_destroy: true)
+
     has_one_attached :avatar
 
     belongs_to :user
@@ -15,5 +18,9 @@ class Profile < ApplicationRecord
 
     def reject_experience_create(experience)
         experience[:company].blank? or experience[:position].blank? or experience[:start].blank? or experience[:end].blank?
+    end
+
+    def reject_project_create(project)
+        project[:title].blank? or project[:project_url].blank? or project[:tech_stack].blank?
     end
 end
