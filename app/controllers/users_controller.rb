@@ -14,7 +14,7 @@ class UsersController < ApplicationController
             flash[:success] = "Registered successfully!"
 
         else
-            flash.now[:danger] = 'An error occured'
+            flash.now[:danger] = user.errors.full_messages.first
             render('new')
         end
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :confirm_password, :avatar)
+        params.require(:user).permit(:name, :email, :password, :confirm_password)
     end
 
 end
